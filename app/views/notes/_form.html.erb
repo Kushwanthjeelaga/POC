@@ -1,0 +1,97 @@
+
+<nav class="navbar  bg-secondary" >
+
+  <div class="container-fluid " style="height:50px ">
+  <div class="right">
+   <i class="fa-solid fa-xmark" style="font-size: 3rem"></i>
+   <i class="fa-solid fa-download" style="font-size: 3rem" ></i>
+  </div>
+  </div>
+   
+ 
+</nav>
+
+<style>
+.fa-arrow-left:before {
+    content: "\f060";
+    color: black;
+}
+.fa-xmark:before {
+    content: "\f00d";
+    padding:7px;
+}
+.fa-download:before {
+    content: "\f019";
+    padding:7px;
+}
+.right{
+  position:absolute;
+  right:0px;
+}
+</style>
+
+<%= form_with model: note do |form| %>
+
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %><br>
+    <% @note.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %> 
+  </div>
+  
+
+  <div>
+    <%= form.label :description%><br>
+    <%= form.text_area :description %><br>
+    <% @note.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <h5>Do you really want to delete this note</h5>
+        
+          <div class="modal-footer">
+        
+          <%= link_to "Delete", trash_path(:note => {:id => note_id}), class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  <%=  button_tag  type: "submit", :class=> " btn position-absolute top-0 start-0" do %>  
+    <i class="fa-solid fa-arrow-left" style="font-size: 2rem; margin-top: 10px;" ></i>
+  <% end %>
+<% end %>
+
+<script>
+var modal = document.querySelector('.modal');
+var closemodal = document.querySelector('.btn-close');
+var openmodal = document.querySelector('.fa-xmark');
+
+
+closemodal.onclick = ()=>{
+  
+modal.style.display = "none";}
+
+openmodal.addEventListener('click',()=>modal.style.display = "block");
+
+</script>
+
+
+
+
+

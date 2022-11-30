@@ -1,0 +1,167 @@
+  
+      <nav class="navbar bg-secondary">
+        <div class="container-fluid">
+          <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>    
+          </button>
+          
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2 filters_search_textbox" type="search" onkeyup="mysearch()" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary filters_search_textbox" type="submit" onclick="mysearch()" >Search</button>
+          </form>  
+        </div>
+      </nav>
+
+
+
+
+<div onclick="closeNav()"> 
+        <div class="row row-cols-1 row-cols-md-4 g-4 " id="cards_container">
+
+          <% @notes.each do |user| %>
+            <div class="col">
+              <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                
+                  <h5 class="card-title">notes</h5>
+                  
+                    <div class="grid-item">
+                    <li>
+                    <b> <span class="container_title"> <%=  user.title%> </span></b><br>
+                      <%=  user.description %>
+                    </li>
+                    </div>
+              
+                </div>
+              </div>
+            </div>
+          <%end%>
+        </div>
+
+      <nav class="navbar fixed-bottom bg">
+        <div class="container-fluid">
+            <a class="navbar-brand " > 
+              <%= button_to "+" , new_note_path , method: :get ,class: "btn btn-warning"%>
+            </a>
+            
+        </div>
+      </nav>
+</div>
+
+
+
+<style>
+
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: grey ;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a>
+    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-warning"%>
+  </a>
+  <a >
+    <%= button_to "Bin", trash_path, method: :get, class: "btn btn-warning"%>
+  </a>
+</div>
+
+
+<script>
+
+function openNav() {
+  
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  if(document.getElementById("mySidebar").style.width == "250px" ){
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+  }
+  
+}
+
+function mysearch() {
+    const input=document.querySelector(".filters_search_textbox").value.toUpperCase();
+    
+    const cardContainer=document.getElementById("cards_container");
+    const cards= cardContainer.getElementsByClassName("card");
+    for(i=0; i<cards.length; i++){
+      let title;
+      title=cards[i].querySelector(".container_title")
+      if(title.innerHTML.toUpperCase().indexOf(input)>-1){
+        cards[i].parentElement.style.display="";
+      }
+    else{
+        cards[i].parentElement.style.display="none";
+      }
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
