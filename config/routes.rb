@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "notes#index"
   resources :notes
-  match "note/trash" => "buckets#trash", as: :trash, via: [:get, :post]
+  post "note/delete", to: "bins#delete", as: "delete"
+  get "note/trash", to: "bins#trash", as: "trash"
   
 end

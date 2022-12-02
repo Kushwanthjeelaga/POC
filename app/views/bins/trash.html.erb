@@ -1,0 +1,105 @@
+<nav class="navbar bg-secondary">
+  <div class="container-fluid" style="height:50px ">
+    <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>    
+    </button>
+    <form class="d-flex mt-3" role="search">
+      <button class="btn btn-primary filters_search_textbox" type="submit" onclick="mysearch()" >delete all</button>
+    </form>
+  </div>
+</nav>
+
+<div class="grid-container">
+  <% @trash.each do |trash|%>
+    <div class="grid-item">
+      <li>
+      <b>  <%= trash.title %> </b><br>
+        <%= trash.description %>
+      </li>
+    </div>
+  <% end %>
+</div>
+
+
+<style>
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: grey ;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .openbtn {
+    cursor: pointer;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
+    padding: 10px;
+  }
+  .grid-item {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+</style> 
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a>
+    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-warning"%>
+  </a>
+  <a >
+    <%= button_to "Bin", trash_path, class: "btn btn-warning", method: :get%>
+  </a>
+</div>
+
+<script>
+
+  function openNav() {
+    
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  function closeNav() {
+    if(document.getElementById("mySidebar").style.width == "250px" ){
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+    
+  }
+</script>
