@@ -11,8 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_11_29_070534) do
-# Could not dump table "bins" because of following StandardError
-#   Unknown type 'test' for column 'description'
+  create_table "bins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "buckets", force: :cascade do |t|
     t.string "title"
@@ -26,6 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_070534) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bin_id"
+    t.index ["bin_id"], name: "index_notes_on_bin_id"
   end
 
+  add_foreign_key "notes", "bins"
 end

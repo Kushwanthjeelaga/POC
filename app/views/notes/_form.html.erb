@@ -6,84 +6,103 @@
     </button>
     <div class="right">
       <i class="fa-solid fa-xmark" style="font-size: 3rem"></i>
-      <i class="fa-solid fa-download" style="font-size: 3rem" ></i>
     </div>
   </div> 
 </nav>
 
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info alert-dissmisible fade show">
+    <%= msg %>
+  </div>
+<% end %>
+
 <style>
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: grey ;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: grey ;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
 
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-  transition: 0.3s;
-}
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
 
-.sidebar a:hover {
-  color: #f1f1f1;
-}
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
 
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-  .fa-arrow-left:before {
-      content: "\f060";
-      color: black;
-      left: 80px;
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+    .fa-arrow-left:before {
+        content: "\f060";
+        color: black;
+
+    }
+    .fa-xmark:before {
+        content: "\f00d";
+        padding:7px;
+    }
+    .fa-download:before {
+        content: "\f019";
+        padding:7px;
+        color: black;
+    }
+    .right{
+      position:absolute;
+      right:0px;
+    }
+    .download{
       position: absolute;
-  }
-  .fa-xmark:before {
-      content: "\f00d";
-      padding:7px;
-  }
-  .fa-download:before {
-      content: "\f019";
-      padding:7px;
-  }
-  .right{
-    position:absolute;
-    right:0px;
-  }
-  .left{
+      top: 0px;
+      right: 30px;
+    }
+    .backandsave{
+      position: absolute;
+      top: 10px;
+      left: 70px;
+    }
 
-  }
+    .form{
+      position: absolute;
+      left: 85px;
+    }
 </style>
 
-<%= form_with model: note do |form| %>
 
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %><br>
-    <% @note.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %> 
-  </div>
-  
-  <div >
-    <%= form.label :description%><br>
-    <%= form.text_area :description %><br>
-    <% @note.errors.full_messages_for(:description).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+<%= form_with model: note,id: "type" do |form| %>
+  <div class="form">
+    <div>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %><br>
+      <% @note.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
+      <% end %> 
+    </div>
+    
+    <div >
+      <%= form.label :description%><br>
+      <%= form.text_area :description, size: "30x10" %><br>
+      <% @note.errors.full_messages_for(:description).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
   </div>
 
   <div class="modal">
@@ -106,11 +125,13 @@
       </div>
     </div>
   </div> 
-  <div class="left">
-    <%=  button_tag  type: "submit", :class=> " btn position-absolute top-0 start-0 left" do %>  
-      <i class="fa-solid fa-arrow-left" style="font-size: 2rem; margin-top: 10px;" ></i>
+
+    <%=  button_tag  type: "submit",:class=> " btn backandsave" do %>  
+      <i class="fa-solid fa-arrow-left" style="font-size: 2rem; " ></i>
     <% end %>
-  </div>  
+    <%=  button_tag  type: "submit", :onclick => "download()", :class=> " btn download" do %>  
+      <i class="fa-solid fa-download" style="font-size: 40px;float: right;margin-right: 35px;margin-top: 5px;"></i>
+    <% end %>
 <% end %>
 
 <div id="mySidebar" class="sidebar">
@@ -138,16 +159,28 @@
   function openNav() {
     
     document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    
   }
 
   function closeNav() {
     if(document.getElementById("mySidebar").style.width == "250px" ){
       document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
+      
     }
     
   }
+ 
+  a=document.querySelector(".backandsave").addEventListener('click', function () {
+    const temp = document.getElementById("type")
+    temp.action = 'http://localhost:3000/notes'
+  })
+
+  function download(){
+    let b=document.getElementById("type")
+    b.action = 'http://localhost:3000/notes.csv'    
+  }
+
+
 
 </script>
 

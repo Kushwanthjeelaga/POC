@@ -13,6 +13,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  # config.action_view.preload_links_header = false
 
   # Enable server timing
   config.server_timing = true

@@ -12,39 +12,43 @@
   </div>
 </nav>
 
-
-
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info alert-dissmisible fade show">
+    <%= msg %>
+  </div>
+<% end %>
 
 <div onclick="closeNav()"> 
-        <div class="row row-cols-1 row-cols-md-4 g-4 " id="cards_container">
-
-          <% @notes.each do |user| %>
-            <div class="col">
-              <div class="card" style="width: 18rem;">
-
-                <div class="card-body">
-                
-                  <h5 class="card-title">notes</h5>
-                  
-                    <div class="grid-item">
-                    <li>
-                    <b> <span class="container_title"> <%=  user.title%> </span></b><br>
-                    <span class="container_description"> <%=  user.description %></span>
-                    </li>
-                    </div>
-              
+    <div class="row row-cols-1 row-cols-md-4 g-4 " id="cards_container" style="padding: 50px 0px 0px 40px">    
+      <% @notes.each do |note| %>
+        <div class="col" onclick="abc(this)">
+          <div class="card show" style="width: 18rem; ">
+            <div class="card-body">
+              <div class="not" id= <%= note.id %>>
+                <h5 class="card-title">notes</h5>                  
+                <div class="grid-item">
+                  <li>
+                  <b>
+                  <span class="container_title"> 
+                      <%=  note.title %>
+                  </span></b><br>
+                  <span class="container_description">
+                      <%=  note.description %>
+                  </span>
+                  </li>
                 </div>
-              </div>
+              </div>              
             </div>
-          <%end%>
-        </div>
+          </div>            
+        </div>        
+      <%end%>
+    </div>
 
       <nav class="navbar fixed-bottom bg">
         <div class="container-fluid">
             <a class="navbar-brand " > 
               <%= button_to "+" , new_note_path , method: :get ,class: "btn btn-warning add-new-note"%>
-            </a>
-            
+            </a>            
         </div>
       </nav>
 </div>
@@ -116,13 +120,12 @@
 function openNav() {
   
   document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
+  
 }
 
 function closeNav() {
   if(document.getElementById("mySidebar").style.width == "250px" ){
     document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
   }
   
 }
@@ -144,6 +147,10 @@ function mysearch() {
         cards[i].parentElement.style.display="none";
       }
     }
+}
+function abc(element){
+ 
+  window.location.href = 'http://localhost:3000/notes/' + element.querySelector(".not").id;
 }
 </script>
 

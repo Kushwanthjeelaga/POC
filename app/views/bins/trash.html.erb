@@ -3,22 +3,23 @@
     <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>    
     </button>
-    <form class="d-flex mt-3" role="search">
-      <button class="btn btn-primary filters_search_textbox" type="submit" onclick="mysearch()" >delete all</button>
-    </form>
+    
+    <%= link_to "Delete all", destroy_bin_path, data: {
+      turbo_method: :delete,
+    } ,class: "btn btn-danger" %>
+    
   </div>
 </nav>
-
-<div class="grid-container">
-  <% @trash.each do |trash|%>
-    <div class="grid-item">
-      <li>
-      <b>  <%= trash.title %> </b><br>
-        <%= trash.description %>
-      </li>
-    </div>
-  <% end %>
-</div>
+  <div style=" padding: 10px 10px 10px 10px;">
+    <% @trash.each do |trash|%>
+      <div class="grid-item", style="float:left"%">
+        <li>
+        <b>  <%= trash.title %> </b><br>
+          <%= trash.description %>
+        </li>
+      </div>
+    <% end %>
+  </div>
 
 
 <style>
@@ -61,18 +62,15 @@
     cursor: pointer;
   }
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: white;
-    padding: 10px;
-  }
   .grid-item {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
+    padding: 0px 50px 50px 50px;
+    margin: 5px 5px 5px 5px;
     font-size: 30px;
     text-align: center;
+    width: 32%;
+    height: 45vh;
   }
 
 </style> 
@@ -84,6 +82,9 @@
   </a>
   <a >
     <%= button_to "Bin", trash_path, class: "btn btn-warning", method: :get%>
+  </a>
+  <a >
+    <%= button_to "New Note", new_note_path , class: "btn btn-warning", method: :get%>
   </a>
 </div>
 
