@@ -32,27 +32,6 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
-  def edit
-    @note = Note.find(params[:id])
-  end
-
-  def update
-    @note = Note.find(params[:id])
-
-    if @note.update(title: params[:note][:title], description: params[:note][:description])
-      redirect_to note_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-
-
-  def download
-
-
-  end
-
   def destroy
     @note = Note.find(params[:id])
     @bin = Bin.new
