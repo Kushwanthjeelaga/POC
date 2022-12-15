@@ -28,21 +28,20 @@ class NotesController < ApplicationController
       end      
   end
 
-  def show
-    @note = Note.find(params[:id])
-  end
 
   def destroy
+    
     @note = Note.find(params[:id])
     @bin = Bin.new
     if @note.destroy
-     redirect_to trash_path
+     redirect_to trash_path     
      flash[:notice] = "Successfully note is added to bin."
     else 
      redirect_to new_note_path 
      flash[:notice] = "Failed to delete a note."
     end
   end
+
   private 
    def checking_csv_params
     unless params[:note][:title].present? || params[:note][:description]

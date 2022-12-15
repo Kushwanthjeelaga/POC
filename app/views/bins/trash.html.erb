@@ -1,4 +1,4 @@
-<nav class="navbar bg-secondary">
+<nav class="navbar bg-success">
   <div class="container-fluid" style="height:50px ">
     <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>    
@@ -78,13 +78,13 @@
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a>
-    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-warning"%>
+    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-success"%>
   </a>
   <a >
-    <%= button_to "Bin", trash_path, class: "btn btn-warning", method: :get%>
+    <%= button_to "Bin", trash_path, class: "btn btn-success", method: :get%>
   </a>
   <a >
-    <%= button_to "New Note", new_note_path , class: "btn btn-warning", method: :get%>
+    <%= button_to "New Note", new_note_path , class: "btn btn-success", method: :get%>
   </a>
 </div>
 

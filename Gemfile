@@ -60,7 +60,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "wkhtmltopdf-binary"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -74,15 +73,11 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rails-controller-testing'
+  gem 'rexml'
 end
-
-group :production do
-  gem "wkhtmltopdf-heroku"
-end
-
 
 gem 'pry-rails'
-gem "prawn", "~> 2.4"
 
-gem "prawn-table", "~> 0.2.2"
-gem "wicked_pdf"
+gem "will_paginate"
+

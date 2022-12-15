@@ -1,5 +1,5 @@
 
-<nav class="navbar  bg-secondary" >
+<nav class="navbar  bg-success" >
   <div class="container-fluid " style="height:50px ">
     <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>    
@@ -81,7 +81,8 @@
 
     .form{
       position: absolute;
-      left: 85px;
+      left: 550px;
+      top: 150px;
     }
 </style>
 
@@ -90,7 +91,7 @@
   <div class="form">
     <div>
       <%= form.label :title %><br>
-      <%= form.text_field :title %><br>
+      <%= form.text_field :title, size: "47x10" %><br>
       <% @note.errors.full_messages_for(:title).each do |message| %>
         <div><%= message %></div>
       <% end %> 
@@ -98,7 +99,7 @@
     
     <div >
       <%= form.label :description%><br>
-      <%= form.text_area :description, size: "30x10" %><br>
+      <%= form.text_area :description, size: "50x10" %><br>
       <% @note.errors.full_messages_for(:description).each do |message| %>
         <div><%= message %></div>
       <% end %>
@@ -116,7 +117,7 @@
 
           <h5>Do you really want to delete this note</h5>
         
-          <div class="modal-footer">
+          <div class="modal-footer ">
         
             <%= form.submit "Delete", formaction: delete_path %>
 
@@ -137,10 +138,10 @@
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a>
-    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-warning"%>
+    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-success"%>
   </a>
   <a >
-    <%= button_to "Bin", trash_path, class: "btn btn-warning", method: :get%>
+    <%= button_to "Bin", trash_path, class: "btn btn-success", method: :get%>
   </a>
 </div>
 

@@ -1,5 +1,5 @@
   
-<nav class="navbar bg-secondary">
+<nav class="navbar bg-success">
   <div class="container-fluid">
     <button class="navbar-toggler openbtn"  onclick="openNav()" type="button"   data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>    
@@ -19,10 +19,10 @@
 <% end %>
 
 <div onclick="closeNav()"> 
-    <div class="row row-cols-1 row-cols-md-4 g-4 " id="cards_container" style="padding: 50px 0px 0px 40px">    
+    <div class="row row-cols-1 row-cols-md-4 g-4 " id="cards_container" style="padding: 50px 0px 0px 40px; ">   
       <% @notes.each do |note| %>
-        <div class="col" onclick="abc(this)">
-          <div class="card show" style="width: 18rem; ">
+        <div class="col"> 
+          <div class="card show" style="width: 18rem;">
             <div class="card-body">
               <div class="not" id= <%= note.id %>>
                 <h5 class="card-title">notes</h5>                  
@@ -44,10 +44,11 @@
       <%end%>
     </div>
 
+
       <nav class="navbar fixed-bottom bg">
         <div class="container-fluid">
             <a class="navbar-brand " > 
-              <%= button_to "+" , new_note_path , method: :get ,class: "btn btn-warning add-new-note"%>
+              <%= button_to "+" , new_note_path , method: :get ,class: "btn btn-success add-new-note"%>
             </a>            
         </div>
       </nav>
@@ -107,12 +108,13 @@
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
   <a>
-    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-warning "%>
+    <%= button_to "Notes" , notes_path , method: :get ,class: "btn btn-success "%>
   </a>
   <a >
-    <%= button_to "Bin", trash_path, class: "btn btn-warning ", method: :get%>
+    <%= button_to "Bin", trash_path, class: "btn btn-success ", method: :get%>
   </a>
 </div>
+
 
 
 <script>
